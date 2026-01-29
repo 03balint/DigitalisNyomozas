@@ -8,17 +8,18 @@ namespace DigitalisNyomozas
 {
 	internal class DataStore
 	{
-		private List<User> felhasznalok;
-		private List<Case> ugyek;
-		private List<Person> szemelyek;
-		private List<Evidence> bizonyitekok;
+		public List<User> felhasznalok;
+		public List<Case> ugyek;
+		public List<Person> szemelyek;
+		public List<Evidence> bizonyitekok;
 
-		public DataStore(List<User> felhasznalok, List<Case> ugyek, List<Person> szemelyek, List<Evidence> bizonyitekok)
+		public DataStore()
 		{
-			this.felhasznalok = felhasznalok;
-			this.ugyek = ugyek;
-			this.szemelyek = szemelyek;
-			this.bizonyitekok = bizonyitekok;
+			this.felhasznalok =new List<User>();
+			this.ugyek = new List<Case>();
+			this.szemelyek =new List<Person>();
+			this.bizonyitekok = new List<Evidence>();
+			
 		}
 
 		internal List<User> Felhasznalok { get => felhasznalok; set => felhasznalok = value; }

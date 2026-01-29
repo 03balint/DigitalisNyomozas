@@ -8,9 +8,26 @@ namespace DigitalisNyomozas
 {
 	internal class EvidenceManager
 	{
-		public void BizonyitekHozzadasa() 
-		{
+		private DataStore tarhely;
 
+		public EvidenceManager(DataStore tarhely) 
+		{
+			 this.tarhely = tarhely;
+		}
+		public void BizonyitekHozzadasa(Evidence x) 
+		{
+			this.tarhely.Bizonyitekok.Add(x);
+		}
+		public void BizonyitekTorlese(Evidence x) 
+		{
+			this.tarhely.Bizonyitekok.Remove(x);
+		}
+		public void BizonyitekListazas()
+		{
+			foreach (Evidence item in this.tarhely.Bizonyitekok)
+			{
+				Console.WriteLine(item);
+			}
 		}
 	}
 }
