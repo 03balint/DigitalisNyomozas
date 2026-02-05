@@ -37,5 +37,15 @@ namespace DigitalisNyomozas
 				sorszam++;
 			}
 		}
+		public void UgyekListazas()
+		{
+			int sorszam = 1;
+			Console.WriteLine("Ügyek:");
+			foreach (Case item in Ugyek)
+			{
+				Console.WriteLine(sorszam + ". " + item);
+				sorszam++;
+			}
+		}
 	}
 }

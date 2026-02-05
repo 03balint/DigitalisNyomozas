@@ -11,11 +11,11 @@ namespace DigitalisNyomozas
 		private string ugy_azonosito;
 		private string cim;
 		private string leiras;
-		private CaseStatus allapot;
+		private string allapot;
 		private List<string> szemelyek;
 		private List<string> bizonyitekok;
 
-		public Case(string ugy_azonosito, string cim, string leiras, CaseStatus allapot, List<string> szemelyek, List<string> bizonyitekok)
+		public Case(string ugy_azonosito, string cim, string leiras, string allapot, List<string> szemelyek, List<string> bizonyitekok)
 		{
 			this.ugy_azonosito = ugy_azonosito;
 			this.cim = cim;
@@ -30,6 +30,12 @@ namespace DigitalisNyomozas
 		public string Leiras { get => leiras; set => leiras = value; }
 		public List<string> Szemelyek { get => szemelyek; set => szemelyek = value; }
 		public List<string> Bizonyitekok { get => bizonyitekok; set => bizonyitekok = value; }
-		internal CaseStatus Allapot { get => allapot; set => allapot = value; }
+		internal string Allapot { get => allapot; set => allapot = value; }
+
+		public override string ToString()
+		{
+			return $"Azonosító: {ugy_azonosito}; cím: {cim}; leírás: {leiras}; állapot: {allapot}";
+		}
 	}
+	
 }

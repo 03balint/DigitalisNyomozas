@@ -6,6 +6,7 @@ namespace DigitalisNyomozas
     {
 		static DataStore dataStore;
 		static EvidenceManager evidenceManager;
+		static CaseManager caseManager;
         static void Main(string[] args)
         {
 			dataStore = new DataStore();
@@ -43,7 +44,69 @@ namespace DigitalisNyomozas
 
 			}
 		}
-		static void SzemelyekMenu()
+		static void UgyMenu() 
+		{
+			string ugy_azonosito;
+			string cim;
+			string leiras;
+			string allapot;
+
+
+			Console.Clear();
+			Console.WriteLine("1. Új ügy létrehozása\n2. Ügy törlése\n3. Ügyek listázása");
+			ConsoleKey key;
+			key = Console.ReadKey(true).Key;
+			switch (key)
+			{
+				case ConsoleKey.D1:
+					Console.Clear();
+					Console.WriteLine("--- Ügy hozzáadása ---");
+					Console.Write("Ügy azonosító: ");
+					ugy_azonosito = Console.ReadLine();
+					Console.Write("Cím: ");
+					cim = Console.ReadLine();
+					Console.Write("Leírás: ");
+					leiras = Console.ReadLine();
+					Console.Write("Állapot: ");
+					allapot = Console.ReadLine();
+
+
+					Case c = new Case(ugy_azonosito, cim, leiras, allapot, new List<string>(), new List<string>());
+
+					caseManager.UgyHozzaadasa(c);
+
+					Console.WriteLine("\n Ügy hozzádva");
+					Thread.Sleep(1000);
+					Menu();
+					break;
+				case ConsoleKey.D2:
+					Console.Clear();
+					Console.WriteLine("--- Ügy Törlése ---");
+					Console.Write("Ügy sorszáma: ");
+					int sorszam = int.Parse(Console.ReadLine());
+
+
+					caseManager.UgyTorlese(sorszam);
+
+					Console.WriteLine("\nBizonyítek törölve");
+					Thread.Sleep(1000);
+
+
+					Menu();
+					break;
+				case ConsoleKey.D3:
+					Console.Clear();
+					dataStore.UgyekListazas();
+
+					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+					key = Console.ReadKey(true).Key;
+					Menu();
+					break;
+
+
+			}
+		}
+			static void SzemelyekMenu()
 		{
 			string nev;
 			int eletkor;
@@ -167,9 +230,6 @@ namespace DigitalisNyomozas
 			}
 		}
 
-		static void UgyMenu()
-		{
-
-		}
+		
     }
 }
