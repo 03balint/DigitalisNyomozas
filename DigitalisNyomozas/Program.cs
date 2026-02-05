@@ -11,6 +11,7 @@ namespace DigitalisNyomozas
         {
 			dataStore = new DataStore();
 			evidenceManager= new EvidenceManager(dataStore);
+			caseManager =new CaseManager(dataStore);
 			Menu();
 
 		}
@@ -53,7 +54,7 @@ namespace DigitalisNyomozas
 
 
 			Console.Clear();
-			Console.WriteLine("1. Új ügy létrehozása\n2. Ügy törlése\n3. Ügyek listázása");
+			Console.WriteLine("1. Új ügy létrehozása\n2. Ügy törlése\n3. Ügyek listázása\n4. Személy/Bizonyíték hozzárendelése");
 			ConsoleKey key;
 			key = Console.ReadKey(true).Key;
 			switch (key)
@@ -71,11 +72,11 @@ namespace DigitalisNyomozas
 					allapot = Console.ReadLine();
 
 
-					Case c = new Case(ugy_azonosito, cim, leiras, allapot, new List<string>(), new List<string>());
+					Case c = new Case(ugy_azonosito, cim, leiras, allapot, new List<Person>(), new List<Evidence>());
 
 					caseManager.UgyHozzaadasa(c);
 
-					Console.WriteLine("\n Ügy hozzádva");
+					Console.WriteLine("\nÜgy hozzádva");
 					Thread.Sleep(1000);
 					Menu();
 					break;
@@ -102,11 +103,34 @@ namespace DigitalisNyomozas
 					key = Console.ReadKey(true).Key;
 					Menu();
 					break;
+				case ConsoleKey.D4:
+					Console.Clear();
+					Console.WriteLine("--- Személy és Bizonyíték hozzárendelése ---");
 
+					Console.WriteLine("Ügy sorszáma: ");
+					int cSorszam = int.Parse(Console.ReadLine());
+
+					Console.WriteLine("Személy sorszáma: ");
+					int szSorszam=int.Parse(Console.ReadLine());
+
+					Console.WriteLine("Bizonyíték sorszáma: ");
+					int bSorszam = int.Parse(Console.ReadLine());
+
+					Person szemely = dataStore.Szemelyek[szSorszam-1];
+
+					Evidence bizonyitek = dataStore.Bizonyitekok[bSorszam-1];
+
+					dataStore.Ugyek[cSorszam].szemelyek.Add(szemely);
+
+					dataStore.Ugyek[cSorszam].bizonyitekok.Add(bizonyitek);
+
+
+					Menu();
+					break;
 
 			}
 		}
-			static void SzemelyekMenu()
+		static void SzemelyekMenu()
 		{
 			string nev;
 			int eletkor;

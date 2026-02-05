@@ -27,6 +27,7 @@ namespace DigitalisNyomozas
 			}
 			else { Console.WriteLine("Nincs ilyen sorszámú adat!"); }
 		}
+		
 
 	}
 }
