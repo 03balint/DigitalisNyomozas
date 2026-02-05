@@ -16,18 +16,18 @@ namespace DigitalisNyomozas
 		}
 		public void BizonyitekHozzadasa(Evidence x) 
 		{
+
 			this.tarhely.Bizonyitekok.Add(x);
+			
 		}
-		public void BizonyitekTorlese(Evidence x) 
+		public void BizonyitekTorlese(int x) 
 		{
-			this.tarhely.Bizonyitekok.Remove(x);
-		}
-		public void BizonyitekListazas()
-		{
-			foreach (Evidence item in this.tarhely.Bizonyitekok)
+			if (x <= tarhely.Bizonyitekok.Count)
 			{
-				Console.WriteLine(item);
+				this.tarhely.Bizonyitekok.RemoveAt(x-1);
 			}
+			else { Console.WriteLine("Nincs ilyen sorszámú adat!"); }
 		}
+
 	}
 }

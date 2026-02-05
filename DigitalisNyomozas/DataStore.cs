@@ -8,10 +8,10 @@ namespace DigitalisNyomozas
 {
 	internal class DataStore
 	{
-		public List<User> felhasznalok;
-		public List<Case> ugyek;
-		public List<Person> szemelyek;
-		public List<Evidence> bizonyitekok;
+		private List<User> felhasznalok;
+		private List<Case> ugyek;
+		private List<Person> szemelyek;
+		private List<Evidence> bizonyitekok;
 
 		public DataStore()
 		{
@@ -26,5 +26,16 @@ namespace DigitalisNyomozas
 		internal List<Case> Ugyek { get => ugyek; set => ugyek = value; }
 		internal List<Person> Szemelyek { get => szemelyek; set => szemelyek = value; }
 		internal List<Evidence> Bizonyitekok { get => bizonyitekok; set => bizonyitekok = value; }
+
+		public void BizonyitekListazas()
+		{
+			int sorszam = 1;
+			Console.WriteLine("Bizonyítékok:");
+			foreach (Evidence item in Bizonyitekok)
+			{
+				Console.WriteLine(sorszam+". "+item);
+				sorszam++;
+			}
+		}
 	}
 }
