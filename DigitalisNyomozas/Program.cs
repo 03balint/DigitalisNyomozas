@@ -4,7 +4,7 @@ namespace DigitalisNyomozas
 {
     internal class Program
     {
-		static	DataStore dataStore;
+		static DataStore dataStore;
 		static EvidenceManager evidenceManager;
         static void Main(string[] args)
         {
@@ -23,10 +23,10 @@ namespace DigitalisNyomozas
 			switch (key)
 			{
 				case ConsoleKey.D1:
-					// code block
+					UgyMenu();
 					break;
 				case ConsoleKey.D2:
-					// code block
+					SzemelyekMenu();
 					break;
 				case ConsoleKey.D3:
 					BizonyitekMenu();
@@ -43,7 +43,69 @@ namespace DigitalisNyomozas
 
 			}
 		}
+		static void SzemelyekMenu()
+		{
+			string nev;
+			int eletkor;
+			string megjegyzes;
+			Console.Clear();
+			Console.WriteLine("1. Személy hozzáadása\n2. Személy törlése\n3. Személyek listázása");
+			ConsoleKey key;
+			key = Console.ReadKey(true).Key;
+			switch (key)
+			{
+				case ConsoleKey.D1:
+					Console.Clear();
+					Console.WriteLine("--- Személy hozzáadása ---");
+					Console.Write("Név: ");
+					nev = Console.ReadLine();
+					Console.Write("Életkor: ");
+					eletkor = int.Parse(Console.ReadLine());
+					Console.Write("Megjegyzés: ");
+					megjegyzes = Console.ReadLine();
 
+					Person p = new Person(nev,eletkor,megjegyzes);
+
+					dataStore.Szemelyek.Add(p);
+
+					Console.WriteLine("\nSzemély hozzádva");
+					Thread.Sleep(1000);
+					Menu();
+					break;
+				case ConsoleKey.D2:
+					Console.Clear();
+					Console.WriteLine("--- Személy Törlése ---");
+					Console.Write("Személy sorszáma: ");
+					int sorszam = int.Parse(Console.ReadLine());
+
+
+					dataStore.Szemelyek.RemoveAt(sorszam-1);
+
+					Console.WriteLine("\nSzemély törölve");
+					Thread.Sleep(1000);
+
+
+					Menu();
+					break;
+				case ConsoleKey.D3:
+					Console.Clear();
+					int index = 1;
+					Console.WriteLine("Személyek:");
+					foreach (Person item in dataStore.Szemelyek)
+					{
+						Console.WriteLine(index + ". " + item);
+						index++;
+					}
+
+					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+					key = Console.ReadKey(true).Key;
+					Menu();
+					break;
+
+
+			}
+
+		}
 		static void BizonyitekMenu()
 		{
 			string azonosito;
@@ -103,6 +165,11 @@ namespace DigitalisNyomozas
 
 
 			}
+		}
+
+		static void UgyMenu()
+		{
+
 		}
     }
 }
