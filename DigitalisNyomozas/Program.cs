@@ -54,7 +54,7 @@ namespace DigitalisNyomozas
 
 
 			Console.Clear();
-			Console.WriteLine("1. Új ügy létrehozása\n2. Ügy törlése\n3. Ügyek listázása\n4. Személy/Bizonyíték hozzárendelése");
+			Console.WriteLine("1. Új ügy létrehozása\n2. Ügy törlése\n3. Ügyek listázása\n4. Személy/Bizonyíték hozzárendelése\n5. Ügy állapotának módosítása \n 6. Vissza");
 			ConsoleKey key;
 			key = Console.ReadKey(true).Key;
 			switch (key)
@@ -78,7 +78,7 @@ namespace DigitalisNyomozas
 
 					Console.WriteLine("\nÜgy hozzádva");
 					Thread.Sleep(1000);
-					Menu();
+                    UgyMenu();
 					break;
 				case ConsoleKey.D2:
 					Console.Clear();
@@ -89,11 +89,11 @@ namespace DigitalisNyomozas
 
 					caseManager.UgyTorlese(sorszam);
 
-					Console.WriteLine("\nBizonyítek törölve");
+					Console.WriteLine("\nÜgy törölve");
 					Thread.Sleep(1000);
 
 
-					Menu();
+                    UgyMenu();
 					break;
 				case ConsoleKey.D3:
 					Console.Clear();
@@ -101,7 +101,7 @@ namespace DigitalisNyomozas
 
 					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
 					key = Console.ReadKey(true).Key;
-					Menu();
+                    UgyMenu();
 					break;
 				case ConsoleKey.D4:
 					Console.Clear();
@@ -125,10 +125,30 @@ namespace DigitalisNyomozas
 					dataStore.Ugyek[cSorszam].bizonyitekok.Add(bizonyitek);
 
 
-					Menu();
+                    UgyMenu();
+					break;
+                case ConsoleKey.D5:
+                    Console.Clear();
+                    Console.WriteLine("--- Ügy állapotának módosítása ---");
+
+                    Console.WriteLine("Ügy sorszáma: ");
+                    int cmSorszam = int.Parse(Console.ReadLine());
+
+                    Console.Write("Állapot: ");
+                    string cmallapot = Console.ReadLine();
+
+					dataStore.Ugyek[cmSorszam - 1].Allapot = cmallapot;
+
+                    Console.WriteLine("\nÜgy módosítva");
+                    Thread.Sleep(1000);
+
+                    UgyMenu();
 					break;
 
-			}
+				case ConsoleKey.D6:
+					Menu();
+					break;
+            }
 		}
 		static void SzemelyekMenu()
 		{
