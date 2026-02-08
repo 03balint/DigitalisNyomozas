@@ -20,7 +20,7 @@ namespace DigitalisNyomozas
 		static void Menu()
 		{
 			Console.Clear();
-			Console.WriteLine("1. Ügyek kezelése\n2. Személyek kezelése\n3. Bizonyítékok kezelése\n4. Idővonal megtekintése\n5. Elemzés / döntések\n6. Kilépés");
+			Console.WriteLine("1. Ügyek kezelése\n2. Személyek kezelése\n3. Bizonyítékok kezelése\n4. Idővonal megtekintése\n5. Elemzés\n6. Kilépés");
 			ConsoleKey key;
 			key = Console.ReadKey(true).Key;
 			switch (key)
@@ -38,7 +38,7 @@ namespace DigitalisNyomozas
 					IdovonalMenu();
 					break;
 				case ConsoleKey.D5:
-					// code block
+					ElemzesMenu();
 					break;
 				case ConsoleKey.D6:
 					Environment.Exit(0);
@@ -337,6 +337,9 @@ namespace DigitalisNyomozas
 
             }
         }
-		
+		static void ElemzesMenu()
+		{
+
+		}
     }
 }
