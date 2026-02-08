@@ -7,6 +7,7 @@ namespace DigitalisNyomozas
 		static DataStore dataStore;
 		static EvidenceManager evidenceManager;
 		static CaseManager caseManager;
+		static TimelineEvent idovonal;
         static void Main(string[] args)
         {
 			dataStore = new DataStore();
@@ -34,7 +35,7 @@ namespace DigitalisNyomozas
 					BizonyitekMenu();
 					break;
 				case ConsoleKey.D4:
-					// code block
+					IdovonalMenu();
 					break;
 				case ConsoleKey.D5:
 					// code block
@@ -156,7 +157,7 @@ namespace DigitalisNyomozas
 			int eletkor;
 			string megjegyzes;
 			Console.Clear();
-			Console.WriteLine("1. Személy hozzáadása\n2. Személy törlése\n3. Személyek listázása");
+			Console.WriteLine("1. Személy hozzáadása\n2. Személy törlése\n3. Személyek listázása\n4. Vissza");
 			ConsoleKey key;
 			key = Console.ReadKey(true).Key;
 			switch (key)
@@ -177,7 +178,7 @@ namespace DigitalisNyomozas
 
 					Console.WriteLine("\nSzemély hozzádva");
 					Thread.Sleep(1000);
-					Menu();
+                    SzemelyekMenu();
 					break;
 				case ConsoleKey.D2:
 					Console.Clear();
@@ -192,7 +193,7 @@ namespace DigitalisNyomozas
 					Thread.Sleep(1000);
 
 
-					Menu();
+                    SzemelyekMenu();
 					break;
 				case ConsoleKey.D3:
 					Console.Clear();
@@ -206,9 +207,12 @@ namespace DigitalisNyomozas
 
 					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
 					key = Console.ReadKey(true).Key;
-					Menu();
+                    SzemelyekMenu();
 					break;
 
+				case ConsoleKey.D4:
+					Menu();
+					break;
 
 			}
 
@@ -221,7 +225,7 @@ namespace DigitalisNyomozas
 			int megbizhatosag;
 			
 			Console.Clear();
-			Console.WriteLine("1. Bizonyíték hozzáadása\n2. Bizonyíték törlése\n3. Bizonyítékok listázása");
+			Console.WriteLine("1. Bizonyíték hozzáadása\n2. Bizonyíték törlése\n3. Bizonyítékok listázása\n4. Vissza");
 			ConsoleKey key;
 			key = Console.ReadKey(true).Key;
 			switch (key)
@@ -244,7 +248,7 @@ namespace DigitalisNyomozas
 					
 					Console.WriteLine("\nBizonyítek hozzádva");
 					Thread.Sleep(1000);
-					Menu();
+                    BizonyitekMenu();
 					break;
 				case ConsoleKey.D2:
 					Console.Clear();
@@ -259,7 +263,7 @@ namespace DigitalisNyomozas
 					Thread.Sleep(1000);
 
 
-					Menu();
+                    BizonyitekMenu();
 					break;
 				case ConsoleKey.D3:
 					Console.Clear();
@@ -267,13 +271,72 @@ namespace DigitalisNyomozas
 
 					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
 					key = Console.ReadKey(true).Key;
+                    BizonyitekMenu();
+					break;
+				case ConsoleKey.D4:
 					Menu();
 					break;
 
-
 			}
 		}
+		static void IdovonalMenu()
+		{
+            DateTime datum;
 
+            string leiras;
+
+
+            Console.Clear();
+            Console.WriteLine("1. Esemény hozzáadása\n2. Esemény törlése\n3. Idővonal megtekintése\n4. Vissza");
+            ConsoleKey key;
+            key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.D1:
+                    Console.Clear();
+                    Console.WriteLine("--- Esemény hozzáadása ---");
+                    Console.Write("Dátum: ");
+                    datum = DateTime.Parse(Console.ReadLine());
+                    Console.Write("Leírás: ");
+                    leiras = Console.ReadLine();
+
+                    TimelineEvent t = new TimelineEvent(datum, leiras);
+
+                    idovonal.EsemenyHozzadása(t);
+
+                    Console.WriteLine("\nEsemény hozzádva");
+                    Thread.Sleep(1000);
+                    IdovonalMenu();
+                    break;
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("--- Esemény Törlése ---");
+                    Console.Write("Esemény sorszáma: ");
+                    int sorszam = int.Parse(Console.ReadLine());
+
+
+                    idovonal.EsemenyTorlese(sorszam);
+
+                    Console.WriteLine("\nEsemény törölve");
+                    Thread.Sleep(1000);
+
+
+                    IdovonalMenu();
+                    break;
+                case ConsoleKey.D3:
+                    Console.Clear();
+                    dataStore.BizonyitekListazas();
+
+                    Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+                    key = Console.ReadKey(true).Key;
+                    IdovonalMenu();
+                    break;
+                case ConsoleKey.D4:
+                    Menu();
+                    break;
+
+            }
+        }
 		
     }
 }
