@@ -10,7 +10,7 @@ namespace DigitalisNyomozas
     {
         private int hatarErtek;
 
-        public DecisionEngine(int hatarErtek=4)
+        public DecisionEngine(int hatarErtek=80)
         {
             this.hatarErtek = hatarErtek;
         }
@@ -20,7 +20,7 @@ namespace DigitalisNyomozas
         public void Ertekel(Suspect gyanusitott, List<Evidence> bizonyitekok)
         {
 
-            int novel = bizonyitekok.Count / 2;
+            int novel = bizonyitekok.Count / 10;
 
             gyanusitott.Gyanusitottsagi_szint += novel;
 
@@ -28,13 +28,13 @@ namespace DigitalisNyomozas
             if (gyanusitott.Gyanusitottsagi_szint < 1)
                 gyanusitott.Gyanusitottsagi_szint = 1;
 
-            if (gyanusitott.Gyanusitottsagi_szint > 5)
-                gyanusitott.Gyanusitottsagi_szint = 5;
+            if (gyanusitott.Gyanusitottsagi_szint > 100)
+                gyanusitott.Gyanusitottsagi_szint = 100;
 
             Console.WriteLine($"Aktuális gyanúsítottsági szint: {gyanusitott.Gyanusitottsagi_szint}");
 
 
-            if (gyanusitott.Gyanusitottsagi_szint >= 4)
+            if (gyanusitott.Gyanusitottsagi_szint >= 80)
             {
                 Console.WriteLine("A gyanúsított magas kockázatú!");
             }

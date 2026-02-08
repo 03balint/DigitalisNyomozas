@@ -22,5 +22,10 @@ namespace DigitalisNyomozas
 		public int Gyanusitottsagi_szint { get => gyanusitottsagi_szint; set => gyanusitottsagi_szint = value; }
 		public string Status { get => status; set => status = value; }
 		internal Person Gyanusitott { get => gyanusitott; set => gyanusitott = value; }
+
+        public override string ToString()
+        {
+			return $"{gyanusitott}, gyanusítottsági szint {gyanusitottsagi_szint}, status {status}";
+        }
 	}
 }

@@ -8,6 +8,7 @@ namespace DigitalisNyomozas
 		static EvidenceManager evidenceManager;
 		static CaseManager caseManager;
 		static TimelineEvent idovonal;
+		static DecisionEngine decisionEngine;
         static void Main(string[] args)
         {
 			dataStore = new DataStore();
@@ -29,7 +30,7 @@ namespace DigitalisNyomozas
 					UgyMenu();
 					break;
 				case ConsoleKey.D2:
-					SzemelyekMenu();
+					SzemelyKezMenu();
 					break;
 				case ConsoleKey.D3:
 					BizonyitekMenu();
@@ -151,72 +152,187 @@ namespace DigitalisNyomozas
 					break;
             }
 		}
-		static void SzemelyekMenu()
+		static void SzemelyKezMenu()
 		{
-			string nev;
-			int eletkor;
-			string megjegyzes;
-			Console.Clear();
-			Console.WriteLine("1. Személy hozzáadása\n2. Személy törlése\n3. Személyek listázása\n4. Vissza");
-			ConsoleKey key;
-			key = Console.ReadKey(true).Key;
-			switch (key)
-			{
-				case ConsoleKey.D1:
-					Console.Clear();
-					Console.WriteLine("--- Személy hozzáadása ---");
-					Console.Write("Név: ");
-					nev = Console.ReadLine();
-					Console.Write("Életkor: ");
-					eletkor = int.Parse(Console.ReadLine());
-					Console.Write("Megjegyzés: ");
-					megjegyzes = Console.ReadLine();
-
-					Person p = new Person(nev,eletkor,megjegyzes);
-
-					dataStore.Szemelyek.Add(p);
-
-					Console.WriteLine("\nSzemély hozzádva");
-					Thread.Sleep(1000);
-                    SzemelyekMenu();
-					break;
-				case ConsoleKey.D2:
-					Console.Clear();
-					Console.WriteLine("--- Személy Törlése ---");
-					Console.Write("Személy sorszáma: ");
-					int sorszam = int.Parse(Console.ReadLine());
+            Console.Clear();
+            Console.WriteLine("1. Személyek Kezelése\n2. Tanuk kezelése\n3. Gyanusítottak kezelése\n4. Vissza");
+            ConsoleKey key;
+            key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.D1:
+                    SzemelyMenu();
+                    break;
+                case ConsoleKey.D2:
+                    TanuMenu();
+                    break;
+                case ConsoleKey.D3:
+                    GyanusitottMenu();
+                    break;
+                case ConsoleKey.D4:
+                    Menu();
+                    break;
 
 
-					dataStore.Szemelyek.RemoveAt(sorszam-1);
+            }
+        }
+		static void TanuMenu()
+		{
+            Console.Clear();
+            Console.WriteLine("1. Tanu hozzáadása\n2. Tanu törlése\n3. Tanuk listázása\n4. Vissza");
+            ConsoleKey key;
+            key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.D1:
+                    Console.Clear();
+                    Console.WriteLine("--- Tanu hozzáadása ---");
+                    Console.Write("Név: ");
+                    string nev = Console.ReadLine();
+                    Console.Write("Életkor: ");
+                    int eletkor = int.Parse(Console.ReadLine());
+                    Console.Write("Megjegyzés: ");
+                    string megjegyzes = Console.ReadLine();
+                    Console.Write("Vallomás szövege: ");
+                    string vallomas = Console.ReadLine();
+                    Console.Write("Vallomás dátuma: ");
+                    DateTime vallomasdatuma =DateTime.Parse(Console.ReadLine());
 
-					Console.WriteLine("\nSzemély törölve");
-					Thread.Sleep(1000);
+                    Person p = new Person(nev, eletkor, megjegyzes);
+
+                    Witness w = new Witness(p, vallomas, vallomasdatuma);
+
+                    dataStore.Tanuk.Add(w);
+
+                    Console.WriteLine("\nTanu hozzádva");
+                    Thread.Sleep(1000);
+                    TanuMenu();
+                    break;
+
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("--- Tanu Törlése ---");
+                    Console.Write("Tanu sorszáma: ");
+                    int sorszam = int.Parse(Console.ReadLine());
 
 
-                    SzemelyekMenu();
-					break;
-				case ConsoleKey.D3:
-					Console.Clear();
-					int index = 1;
-					Console.WriteLine("Személyek:");
-					foreach (Person item in dataStore.Szemelyek)
-					{
-						Console.WriteLine(index + ". " + item);
-						index++;
-					}
+                    dataStore.Szemelyek.RemoveAt(sorszam - 1);
 
-					Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
-					key = Console.ReadKey(true).Key;
-                    SzemelyekMenu();
-					break;
+                    Console.WriteLine("\nTanu törölve");
+                    Thread.Sleep(1000);
 
-				case ConsoleKey.D4:
-					Menu();
-					break;
 
-			}
+                    TanuMenu();
+                    break;
+                case ConsoleKey.D3:
+                    Console.Clear();
+                    int index = 1;
+                    Console.WriteLine("Tanuk:");
+                    foreach (Witness item in dataStore.Tanuk)
+                    {
+                        Console.WriteLine(index + ". " + item);
+                        index++;
+                    }
 
-		}
+                    Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+                    key = Console.ReadKey(true).Key;
+                    TanuMenu();
+                    break;
+
+                case ConsoleKey.D4:
+					SzemelyKezMenu();
+                    break;
+
+            }
+        }
+		static void GyanusitottMenu()
+		{
+            Console.Clear();
+            Console.WriteLine("1. Gyanusított hozzáadása\n2. Gyanusított törlése\n3. Gyanusítottak listázása\n4. Vissza");
+            ConsoleKey key;
+            key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.D1:
+
+                    break;
+                case ConsoleKey.D2:
+
+                    break;
+                case ConsoleKey.D3:
+
+                    break;
+                case ConsoleKey.D4:
+                    SzemelyKezMenu();
+                    break;
+
+            }
+        }
+		static void SzemelyMenu()
+		{
+            string nev;
+            int eletkor;
+            string megjegyzes;
+            Console.Clear();
+            Console.WriteLine("1. Személy hozzáadása\n2. Személy törlése\n3. Személyek listázása\n4. Vissza");
+            ConsoleKey key;
+            key = Console.ReadKey(true).Key;
+            switch (key)
+            {
+                case ConsoleKey.D1:
+                    Console.Clear();
+                    Console.WriteLine("--- Személy hozzáadása ---");
+                    Console.Write("Név: ");
+                    nev = Console.ReadLine();
+                    Console.Write("Életkor: ");
+                    eletkor = int.Parse(Console.ReadLine());
+                    Console.Write("Megjegyzés: ");
+                    megjegyzes = Console.ReadLine();
+
+                    Person p = new Person(nev, eletkor, megjegyzes);
+
+                    dataStore.Szemelyek.Add(p);
+
+                    Console.WriteLine("\nSzemély hozzádva");
+                    Thread.Sleep(1000);
+                    SzemelyMenu();
+                    break;
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("--- Személy Törlése ---");
+                    Console.Write("Személy sorszáma: ");
+                    int sorszam = int.Parse(Console.ReadLine());
+
+
+                    dataStore.Szemelyek.RemoveAt(sorszam - 1);
+
+                    Console.WriteLine("\nSzemély törölve");
+                    Thread.Sleep(1000);
+
+
+                    SzemelyMenu();
+                    break;
+                case ConsoleKey.D3:
+                    Console.Clear();
+                    int index = 1;
+                    Console.WriteLine("Személyek:");
+                    foreach (Person item in dataStore.Szemelyek)
+                    {
+                        Console.WriteLine(index + ". " + item);
+                        index++;
+                    }
+
+                    Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+                    key = Console.ReadKey(true).Key;
+                    SzemelyMenu();
+                    break;
+
+                case ConsoleKey.D4:
+                    SzemelyKezMenu();
+                    break;
+
+            }
+        }
 		static void BizonyitekMenu()
 		{
 			string azonosito;
@@ -340,6 +456,7 @@ namespace DigitalisNyomozas
 		static void ElemzesMenu()
 		{
 
+			
 		}
     }
 }

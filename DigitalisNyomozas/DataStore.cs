@@ -12,22 +12,29 @@ namespace DigitalisNyomozas
 		private List<Case> ugyek;
 		private List<Person> szemelyek;
 		private List<Evidence> bizonyitekok;
+        private List<Witness> tanuk;
+        private List<Suspect> gyanusitottak;
 
-		public DataStore()
+        public DataStore()
 		{
 			this.felhasznalok =new List<User>();
 			this.ugyek = new List<Case>();
 			this.szemelyek =new List<Person>();
 			this.bizonyitekok = new List<Evidence>();
-			
-		}
+            this.tanuk = new List<Witness>();
+            this.gyanusitottak = new List<Suspect>();
+
+        }
 
 		internal List<User> Felhasznalok { get => felhasznalok; set => felhasznalok = value; }
 		internal List<Case> Ugyek { get => ugyek; set => ugyek = value; }
 		internal List<Person> Szemelyek { get => szemelyek; set => szemelyek = value; }
 		internal List<Evidence> Bizonyitekok { get => bizonyitekok; set => bizonyitekok = value; }
+        internal List<Witness> Tanuk { get => tanuk; set => tanuk = value; }
+        internal List<Suspect> Gyanusitottak { get => gyanusitottak; set => gyanusitottak = value; }
 
-		public void BizonyitekListazas()
+
+        public void BizonyitekListazas()
 		{
 			int sorszam = 1;
 			Console.WriteLine("Bizonyítékok:");
