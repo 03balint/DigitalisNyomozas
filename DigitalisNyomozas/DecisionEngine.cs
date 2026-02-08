@@ -20,7 +20,7 @@ namespace DigitalisNyomozas
         public void Ertekel(Suspect gyanusitott, List<Evidence> bizonyitekok)
         {
 
-            int novel = bizonyitekok.Count / 10;
+            int novel = bizonyitekok.Count * 10;
 
             gyanusitott.Gyanusitottsagi_szint += novel;
 

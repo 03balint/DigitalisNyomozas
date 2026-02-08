@@ -502,8 +502,16 @@ namespace DigitalisNyomozas
         }
 		static void ElemzesMenu()
 		{
+            Console.WriteLine("Ügy sorszáma: ");
+            int sorszamU = int.Parse(Console.ReadLine());
+            Console.WriteLine("Gyanusított sorszáma: ");
+            int sorszamGY=int.Parse(Console.ReadLine());
 
-			
-		}
+            Suspect gyanusitott = dataStore.Gyanusitottak[sorszamGY - 1];
+
+            List <Evidence> bizonyitekok= dataStore.Ugyek[sorszamU - 1].bizonyitekok;
+
+            decisionEngine.Ertekel(gyanusitott, bizonyitekok);
+        }
     }
 }
