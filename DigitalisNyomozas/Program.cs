@@ -216,7 +216,7 @@ namespace DigitalisNyomozas
                     int sorszam = int.Parse(Console.ReadLine());
 
 
-                    dataStore.Szemelyek.RemoveAt(sorszam - 1);
+                    dataStore.Tanuk.RemoveAt(sorszam - 1);
 
                     Console.WriteLine("\nTanu törölve");
                     Thread.Sleep(1000);
@@ -254,18 +254,65 @@ namespace DigitalisNyomozas
             switch (key)
             {
                 case ConsoleKey.D1:
+                    Console.Clear();
+                    Console.WriteLine("--- Gyanusított hozzáadása ---");
+                    Console.Write("Név: ");
+                    string nev = Console.ReadLine();
+                    Console.Write("Életkor: ");
+                    int eletkor = int.Parse(Console.ReadLine());
+                    Console.Write("Megjegyzés: ");
+                    string megjegyzes = Console.ReadLine();
 
+                    Console.Write("Gyanusítottsági szint: ");
+                    int gyanusitottsagiSzint = int.Parse(Console.ReadLine());
+
+                    Console.Write("Státusz: ");
+                    string statusz = Console.ReadLine();
+
+                    Person p = new Person(nev, eletkor, megjegyzes);
+
+                    Suspect s = new Suspect(p, gyanusitottsagiSzint, statusz);
+
+                    dataStore.Gyanusitottak.Add(s);
+
+                    Console.WriteLine("\nGyanusított hozzádva");
+                    Thread.Sleep(1000);
+                    GyanusitottMenu();
                     break;
-                case ConsoleKey.D2:
 
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("--- Gyanusított Törlése ---");
+                    Console.Write("Gyanusított sorszáma: ");
+                    int sorszam = int.Parse(Console.ReadLine());
+
+
+                    dataStore.Gyanusitottak.RemoveAt(sorszam - 1);
+
+                    Console.WriteLine("\nGyanusított törölve");
+                    Thread.Sleep(1000);
+
+
+                    GyanusitottMenu();
                     break;
                 case ConsoleKey.D3:
+                    Console.Clear();
+                    int index = 1;
+                    Console.WriteLine("Gyanusítottak:");
+                    foreach (Suspect item in dataStore.Gyanusitottak)
+                    {
+                        Console.WriteLine(index + ". " + item);
+                        index++;
+                    }
 
+                    Console.WriteLine("\nNyomj egy gombot a kilépéshez!");
+                    key = Console.ReadKey(true).Key;
+                    GyanusitottMenu();
                     break;
+
                 case ConsoleKey.D4:
                     SzemelyKezMenu();
                     break;
-
             }
         }
 		static void SzemelyMenu()
